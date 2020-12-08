@@ -1,0 +1,58 @@
+{
+    "name": "simple-bus/asynchronous-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony bundle for using SimpleBus/Asynchronous",
+    "keywords": [
+        "asynchronous",
+        "message",
+        "message bus",
+        "event bus",
+        "command bus"
+    ],
+    "homepage": "http://github.com/SimpleBus/AsynchronousBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cliff Odijk",
+            "email": "cliff@jcid.nl"
+        },
+        {
+            "name": "Ruud Kamphuis",
+            "homepage": "https://github.com/ruudk"
+        },
+        {
+            "name": "Matthias Noback",
+            "email": "matthiasnoback@gmail.com",
+            "homepage": "http://php-and-symfony.matthiasnoback.nl"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "beberlei/assert": "^3.0",
+        "simple-bus/asynchronous": "^3.0",
+        "simple-bus/message-bus": "^3.0",
+        "simple-bus/symfony-bridge": "^5.4.0",
+        "symfony/framework-bundle": "^4.4 || ^5.0"
+    },
+    "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "phpunit/phpunit": "^8.5",
+        "symfony/monolog-bundle": "^3.4"
+    },
+    "suggest": {
+        "symfony/monolog-bundle": "For logging messages"
+    },
+    "autoload": {
+        "psr-4": {
+            "SimpleBus\\AsynchronousBundle\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SimpleBus\\AsynchronousBundle\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
