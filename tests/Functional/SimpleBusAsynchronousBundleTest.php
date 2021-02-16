@@ -17,13 +17,12 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         parent::tearDown();
 
         static::$class = null;
-        static::$kernel = null;
     }
 
     /**
      * @test
      */
-    public function itNotifiesSynchronousEventSubscribersAndPublishesEvents()
+    public function itNotifiesSynchronousEventSubscribersAndPublishesEvents(): void
     {
         $kernel = static::createKernel();
         $kernel->boot();
@@ -45,7 +44,7 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
     /**
      * @test
      */
-    public function itNotifiesAsynchronousEventSubscribers()
+    public function itNotifiesAsynchronousEventSubscribers(): void
     {
         $kernel = static::createKernel();
         $kernel->boot();
@@ -67,7 +66,7 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
     /**
      * @test
      */
-    public function itOnlyPublishesUnhandledCommands()
+    public function itOnlyPublishesUnhandledCommands(): void
     {
         $kernel = static::createKernel();
         $kernel->boot();
@@ -85,7 +84,7 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
     /**
      * @test
      */
-    public function itHandlesAsynchronousCommands()
+    public function itHandlesAsynchronousCommands(): void
     {
         $kernel = static::createKernel();
         $kernel->boot();
@@ -107,7 +106,7 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
     /**
      * @test
      */
-    public function itConsumesAsynchronousCommands()
+    public function itConsumesAsynchronousCommands(): void
     {
         $kernel = static::createKernel();
         $kernel->boot();
@@ -115,6 +114,7 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $command = new DummyCommand();
         $envelope = DefaultEnvelope::forSerializedMessage(get_class($command), serialize($command));
 
+        /** @var MessageConsumer $commandConsumer */
         $commandConsumer = $kernel->getContainer()->get('asynchronous_command_consumer');
         $commandConsumer->consume(serialize($envelope));
 
@@ -126,7 +126,7 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
     /**
      * @test
      */
-    public function itConsumesAsynchronousEvents()
+    public function itConsumesAsynchronousEvents(): void
     {
         $kernel = static::createKernel();
         $kernel->boot();
@@ -134,6 +134,7 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $event = new DummyEvent();
         $envelope = DefaultEnvelope::forSerializedMessage(get_class($event), serialize($event));
 
+        /** @var MessageConsumer $commandConsumer */
         $commandConsumer = $kernel->getContainer()->get('asynchronous_event_consumer');
         $commandConsumer->consume(serialize($envelope));
 
@@ -142,8 +143,8 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $this->assertEquals([$event], $spy->handled);
     }
 
-    protected static function getKernelClass()
+    protected static function getKernelClass(): string
     {
-        return 'SimpleBus\AsynchronousBundle\Tests\Functional\TestKernel';
+        return TestKernel::class;
     }
 }
